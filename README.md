@@ -13,11 +13,11 @@ Here are the data for the project:
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
 ## Steps to running the R Script (run_analysis.R)
-This script requires the plyr package 
+This script requires the plyr package. 
 Once you have obtained the and unzipped the source files, you will need to set the path of the working directory to the location of the source files in your own directory.
 
-## Tidying Date
-The result of the running (run_analysis.R) is that a tidyData.txt file is being created, that contains the average of each variable for each activity and each subject.
+## Tidy Data
+The result of the running (run_analysis.R) is that a tidyData.txt file is being created, which contains the average of each variable for each activity and each subject.
 
 ## Further Information
 Refer to CodeBook.md that describes the variables, the data, and any transformations or work that you performed to clean up the data.
