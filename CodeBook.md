@@ -33,6 +33,7 @@ X_train         <- read.table('./train/X_train.txt', header=FALSE);
 X_test          <- read.table('./test/X_test.txt', header=FALSE);
 y_train         <- read.table('./train/y_train.txt', header=FALSE);
 y_test          <- read.table('./test/y_test.txt', header=FALSE);
+'''
 
 ## 2. Extracts only the measurements on the mean and standard deviation for each measurement.
 Create a logcal vector that contains TRUE values for the ID, mean and stdev columns and FALSE values for the others. Subset this data to keep only the necessary columns.
