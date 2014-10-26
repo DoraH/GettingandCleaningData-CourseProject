@@ -32,34 +32,21 @@ After setting the source directory for the files, read into tables the data loca
 * X_test.txt
 * y_train.txt
 * y_test.txt
-Assign column names and merge to create one data set.
+Test (testData) and training (trainingData) data are merged to obtain a single data set (combineData). Variables are labelled with the names assigned by original collectors (features.txt).
 
 ## 2. Extracts only the measurements on the mean and standard deviation for each measurement.
-Determine the columns containing mean or standard deviation while keeping the subjectID and activity columns.
+Determine the columns containing mean or standard deviation while keeping the Subject and ActivityId columns.
 Thereafter, remove the unnecessary columns.
 
 ## 3. Uses descriptive activity names to name the activities in the data set.
-This is already done in  1. when assigning column names to the data set.
-```
-colnames(activity_labels) <- c("activityid", "activity")
-colnames(subject_train)   <- "subjectid"
-colnames(subject_test)    <- "subjectid"
-colnames(y_train)         <- "activity"
-colnames(y_test)          <- "activity"
-colnames(X_train)         <- features$V2
-colnames(X_test)          <- features$V2
-```
+A new column is added to (combineData) with the activity description. ActivityId column is used to look up descriptions in activity_labels.txt.
 
 ## 4. Appropriately labels the data set with descriptive variable names.
-Clean up the data by removing parentheses, dash, commas
-```
-cleancolnames = gsub("\\(|\\)|-|,", "", colnames(combineData))
-colnames(combineData) <- tolower(cleancolnames)
-```
+Labels were clean up by removing parentheses, dash and commas.
 
 ## 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 Using the dplyr package.
 ```
-tidyData = ddply(combineData, .(subjectid, activity), numcolwise(mean))
-write.table(tidyData, file="tidyData.txt", sep = "\t", row.names = FALSE)
+tidyData <- ddply(meanstdcol, c("Subject","Activity"), numcolwise(mean))
+write.table(tidyData, file = "tidyData.txt", sep = "\t", row.names = FALSE)
 ```
