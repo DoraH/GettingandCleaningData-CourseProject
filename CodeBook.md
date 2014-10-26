@@ -24,6 +24,7 @@ For each record in the dataset it is provided:
  
 ## 1. Merges the training and the test sets to create one data set.
 After setting the source directory for the files, read data into data frame
+'''
 features        <- read.table('./features.txt', header=FALSE);
 activity_labels <- read.table('./activity_labels.txt', header=FALSE); 
 subject_train   <- read.table('./train/subject_train.txt', header=FALSE);
