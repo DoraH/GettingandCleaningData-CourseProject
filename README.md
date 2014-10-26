@@ -13,7 +13,7 @@ Below are the data for the project:
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
 ## Steps to running the R Script (run_analysis.R)
-Once you have obtained and unzipped the source files, you will need to set the path of the working directory to the location of the source files in your own directory.
+Once you have obtained and unzipped the source file, you will need to set the path of the working directory to the location of the source files in your own directory.
 plyr package is required for this script.
 
 ## Tidy Data
