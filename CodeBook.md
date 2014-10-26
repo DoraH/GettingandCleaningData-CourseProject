@@ -23,18 +23,42 @@ For each record in the dataset it is provided:
 * An identifier of the subject who carried out the experiment.
  
 ## 1. Merges the training and the test sets to create one data set.
-After setting the source directory for the files, read data into data frame
-```
-features        <- read.table('./features.txt', header=FALSE);
-activity_labels <- read.table('./activity_labels.txt', header=FALSE); 
-subject_train   <- read.table('./train/subject_train.txt', header=FALSE);
-subject_test    <- read.table('./test/subject_test.txt', header=FALSE);
-X_train         <- read.table('./train/X_train.txt', header=FALSE);
-X_test          <- read.table('./test/X_test.txt', header=FALSE);
-y_train         <- read.table('./train/y_train.txt', header=FALSE);
-y_test          <- read.table('./test/y_test.txt', header=FALSE);
-```
+After setting the source directory for the files, read into tables the data located in:
+* features.txt
+* activity_labels.txt
+* subject_train.txt
+* subject_test.txt
+* X_train.txt
+* X_test.txt
+* y_train.txt
+* y_test.txt
+Assign column names and merge to create one data set.
 
 ## 2. Extracts only the measurements on the mean and standard deviation for each measurement.
-Create a logcal vector that contains TRUE values for the ID, mean and stdev columns and FALSE values for the others. Subset this data to keep only the necessary columns.
+Determine the columns containing mean or standard deviation while keeping the subjectID and activity columns.
+Thereafter, remove the unnecessary columns.
 
+## 3. Uses descriptive activity names to name the activities in the data set.
+This is already done in  1. when assigning column names to the data set.
+```
+colnames(activity_labels) <- c("activityid", "activity")
+colnames(subject_train)   <- "subjectid"
+colnames(subject_test)    <- "subjectid"
+colnames(y_train)         <- "activity"
+colnames(y_test)          <- "activity"
+colnames(X_train)         <- features$V2
+colnames(X_test)          <- features$V2
+```
+
+## 4. Appropriately labels the data set with descriptive variable names.
+Clean up the data by removing parentheses, dash, commas
+```
+cleancolnames = gsub("\\(|\\)|-|,", "", colnames(combineData))
+colnames(combineData) <- tolower(cleancolnames)
+```
+
+## 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+```
+tidyData = ddply(combineData, .(subjectid, activity), numcolwise(mean))
+write.table(tidyData, file="tidyData.txt", sep = "\t", row.names = FALSE)
+```
