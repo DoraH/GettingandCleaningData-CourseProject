@@ -58,6 +58,7 @@ colnames(combineData) <- tolower(cleancolnames)
 ```
 
 ## 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+Using the dplyr package.
 ```
 tidyData = ddply(combineData, .(subjectid, activity), numcolwise(mean))
 write.table(tidyData, file="tidyData.txt", sep = "\t", row.names = FALSE)
